@@ -69,3 +69,7 @@ class Token_data(models.Model):
     loginverified = models.BooleanField(default= False)
     passtoken = models.CharField(max_length=100,blank=True)
     passverified = models.BooleanField(default= False)
+
+
+class Donor(models.Model):
+    firstname = models.CharField(max_length=100)
