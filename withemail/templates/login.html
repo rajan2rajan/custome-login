@@ -1,0 +1,44 @@
+{% extends "htmlformate.html" %}
+
+
+
+{% block content %}
+<form class="form-signin" method="post" novalidate>
+    {% csrf_token %}
+    
+    {% if messages %}
+      {% for messages  in messages %}
+        {{messages}}
+      {% endfor %} 
+     
+    {% endif %}
+    <br><br>
+        
+
+    {% for form in form %}
+      {{form.label_tag}}{{form}}{{form.errors|striptags}} <br><br>
+    {% endfor %}
+
+
+    {% for field in registration_form %}
+    <p>
+    {% for error in field.errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+    </p>
+    {% endfor %}
+    {% if registration_form.non_field_errors %}
+    <div style="color: red">
+        <p>{{registration_form.non_field_errors}}</p>
+    </div>
+
+    {% endif %}
+    
+    <input type="submit" name="submit" id="">
+
+    </form>
+    <a href="{% url 'register'%}"><button>register</button></a>
+    
+{% endblock content %}
+
+    
