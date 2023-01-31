@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block views %}
+    {% if perms.donor.delete_donor or perms.donor.edit_donor %}
+        <form action="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for form in form  %}
+            {{form.label_tag}}{{form}}{{form.errors|striptags}} <br><br>
+            {% endfor %}
+            <input type="submit" name="" id="">
+
+        </form>
+    {% endif %}
+
+
+
+
+        <!-- <form action="" method="post" novalidate>
+        {% csrf_token %}
+        Firstname : <input type="text" name="firstname"  id=""> <br><br>
+        Middlename : <input type="text" name="Middlename" id=""><br><br>
+        Lastname : <input type="text" name="lastname" id=""><br><br>
+        Phonenumber : <input type="number" name="phonenumber" id=""min="1" max="5"><br><br>
+        Dateofbirth : <input type="date" name="dateofbirth" id=""><br><br>
+        Image : <input type="file" name="image" id=""><br><br>
+        Bloodgroup: <input type="text" name="" id=""><br><br>
+        Timesofdonate: <input type="datetime-local" name="donatetime" id=""><br><br>
+        Diseases: <input type="text" name="diseases" id=""><br><br>
+        Location: <input type="text" name="location" id=""><br><br>
+
+        <input type="submit" name="" id="">
+
+        </form>
+        -->
+
+
+
+{% endblock views %}
+    
+
+        

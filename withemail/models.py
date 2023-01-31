@@ -64,12 +64,10 @@ class Account(AbstractBaseUser):
 
 # model where we store token of password change and logintoken
 class Token_data(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    logintoken = models.CharField(max_length=100)
-    loginverified = models.BooleanField(default= False)
-    passtoken = models.CharField(max_length=100,blank=True)
-    passverified = models.BooleanField(default= False)
+    user                = models.OneToOneField(Account, on_delete=models.CASCADE)
+    logintoken          = models.CharField(max_length=100)
+    loginverified       = models.BooleanField(default= False)
+    passtoken           = models.CharField(max_length=100,blank=True)
+    passverified        = models.BooleanField(default= False)
 
 
-class Donor(models.Model):
-    firstname = models.CharField(max_length=100)

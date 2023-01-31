@@ -6,7 +6,7 @@ from .utils import send_login_token,send_password_token
 from django.contrib.auth  import login,authenticate,logout,update_session_auth_hash
 from withemail.forms import RegistrationForm,LoginForm,Emailform,UserDetailForm,AdminDetailForm
 from .models import Account,Token_data
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm,SetPasswordForm
 
 
 
@@ -206,4 +206,19 @@ def detailchange(request):
 
 
 
-
+# change password without old password for forget password 
+def newpassword(request):
+    user = request.user
+    if not request.user.is_authenticated:
+        if request.method =="POST":
+            form =SetPasswordForm(user, data = request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request,'password change sucessfull')
+                return HttpResponseRedirect('/login')
+        else:
+        
+            form=SetPasswordForm(user)
+        return render(request, 'newpassword.html',{'form':form})
+    else:
+        return redirect('/home/')

@@ -8,6 +8,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Document</title>
+    <style>
+        #customers {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        #customers td, #customers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        </style>
 </head>
 <body>
     {% load static %}
@@ -29,11 +59,20 @@
             <form class="search-bar justify-content-start">
                 <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
             </form>
+            {% if perms.donor.delete_donor or perms.donor.edit_donor %}
+                <h5 class="mr-3 font-weight-normal justify-content-start">
+                    <a class="p-2 text-dark" href="{% url 'donorform' %}">donate form</a>
+                </h5>
+
+                <h5 class="mr-3 font-weight-normal justify-content-start">
+                    <a class="p-2 text-dark" href="{% url 'donorview' %}">edit donate</a>
+                </h5>
+            {% endif %}
+
+        
+
             <h5 class="mr-3 font-weight-normal justify-content-start">
-                <a class="p-2 text-dark" href="{% url 'home' %}">donate</a>
-            </h5>
-            <h5 class="mr-3 font-weight-normal justify-content-start">
-                <a class="p-2 text-dark" href="{% url 'home' %}">request</a>
+                <a class="p-2 text-dark" href="{% url 'home' %}">request blood </a>
             </h5>
 
             <div class="d-flex flex-row-reverse flex-grow-1">

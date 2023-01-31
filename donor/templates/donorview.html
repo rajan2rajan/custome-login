@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block views %}
+
+
+{% if perms.donor.delete_donor or perms.donor.edit_donor %}
+
+<table id="customers">
+  <tr>
+
+
+    <th>firstname</th>
+    <th>middlename</th>
+    <th>lastname</th>
+    <th>Age</th>
+    <th>Phonenumber</th>
+    <th>Timesofdonate</th>
+    <th>Diseases</th>
+    <th>Donatedate</th>
+    <th>Location</th>
+    <th>Image</th>
+    <th>Gender</th>
+    <th>Bloodgroup</th>
+    <th>operation</th>
+
+  </tr>
+
+  {% for form in form %}
+    <tr>
+        
+        <td>{{form.firstname}}</td>
+        <td>{{form.middlename}}</td>
+        <td>{{form.lastname}}</td>
+        <td>{{form.age}}</td>
+        <td>{{form.phonenumber}}</td>
+        <td>{{form.timesofdonate}}</td>
+        <td>{{form.diseases}}</td>
+        <td>{{form.donatedate}}</td>
+        <td>{{form.location}}</td>
+        <td><img src="{{form.image.url}}" width="100" height="100"></td>
+        <td>{{form.Gender}}</td>
+        <td>{{form.bloodgroup}}</td>
+        <td>  <a href="{% url 'donorupdate' form.id %}"><button>edit</button></a>
+          
+        <a href="{% url 'donordelete' form.id %}"><button>delete</button></a> </td>
+    
+      </tr> 
+  {% endfor %}
+      
+</table>
+<a href="{% url 'donorform' %}"><button>add new</button></a>
+
+{% endif %}
+
+{% endblock views %}
+
+    

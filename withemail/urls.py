@@ -12,6 +12,8 @@ urlpatterns = [
     path('passwordchange/', passwordchange_email , name = 'passwordchange'),
     path('oldpassword/', oldpassword , name = 'oldpassword'),
     path('detailchange/', detailchange , name = 'detailchange'),
+    path('newpassword/',  newpassword, name = 'newpassword'),
+
 
 
 
