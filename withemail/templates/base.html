@@ -67,12 +67,16 @@
                 <h5 class="mr-3 font-weight-normal justify-content-start">
                     <a class="p-2 text-dark" href="{% url 'donorview' %}">edit donate</a>
                 </h5>
+
+                <h5 class="mr-3 font-weight-normal justify-content-start">
+                    <a class="p-2 text-dark" href="{% url 'donorview' %}"> verify need</a>
+                </h5>
             {% endif %}
 
         
 
             <h5 class="mr-3 font-weight-normal justify-content-start">
-                <a class="p-2 text-dark" href="{% url 'home' %}">request blood </a>
+                <a class="p-2 text-dark" href="{% url 'reciverform' %}">request blood </a>
             </h5>
 
             <div class="d-flex flex-row-reverse flex-grow-1">
@@ -80,7 +84,7 @@
                         <div class="dropdown dropleft show p-2">
                             <div class="d-flex flex-row">
 
-                                <div class="btn-group dropleft">
+                                {% comment %} <div class="btn-group dropleft">
                                     <div class="d-flex notifications-icon-container rounded-circle align-items-center mr-3" id="id_chat_notification_dropdown_toggle" data-toggle="dropdown">
                                         <span id="id_chat_notifications_count" class="notify-badge"></span>
                                         <span class="d-flex material-icons notifications-material-icon m-auto align-items-center">chat</span>
@@ -88,7 +92,7 @@
                                                 
                                         </div>
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
 
                                 <div class="btn-group dropleft">
                                     <div class="d-flex notifications-icon-container rounded-circle align-items-center mr-3" id="id_notification_dropdown_toggle" data-toggle="dropdown" onclick="setGeneralNotificationsAsRead()">
