@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+{% block views %}
+
+
+
+
+<h4 style="text-align:center;">
+    people who do  request
+</h4>
+
+    <table id="customers">
+    <tr>
+
+
+        <th>Name</th>
+        
+        <th>Age</th>
+        <th>Phonenumber</th>
+        <th>incident</th>
+        <th>Bloodgroup</th>
+        <th>Gender</th>
+        <th>Hospital name</th>
+        <th>unit</th>        
+        <th>require date</th>       
+        <th>operation</th>
+
+    </tr>
+
+    {% for form in form %}
+        <tr>
+            
+            <td>{{form.firstname}} {{form.middlename}} {{form.lastname}}</td>
+            <td>{{form.age}}</td>
+            <td>{{form.contactnumber}}</td>
+            <td>{{form.incident}}</td>
+            <td>{{form.bloodgroup}}</td>
+            <td>{{form.Gender}}</td>
+            <td>{{form.location}}</td>
+            <td>{{form.unit}}</td>    
+            <td>{{form.requiredate}}</td>
+            <td> Pending ...  </td>
+            
+            
+            
+        
+        </tr> 
+    {% endfor %}
+        
+    </table>
+
+{% endblock views %}
+
+    

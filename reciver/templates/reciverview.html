@@ -4,25 +4,41 @@
 {% block views %}
 
 
-{% if perms.donor.delete_donor or perms.donor.edit_donor %}
+<h4 style="text-align:center;">
+<a href="{% url 'foremergency' %}"><button>emergency</button></a>
+<a href="{% url 'reciverview'%}"><button>non emergency</button></a>
+</h4>
+<h4 style="text-align:center;">
+  <form class="search-bar justify-content-start">
+    {% csrf_token %}
+    <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
+    <button type="submit" class="btn btn-primary">search</button>
+  </form>
+  </h4>
+  {% if messages %}
+  
+  {% for approved in messages %}
+    {{approved}}
+  {% endfor %}
+    
+    
+  {% endif %}
+
 
 <table id="customers">
   <tr>
 
 
-    <th>firstname</th>
-    <th>middlename</th>
-    <th>lastname</th>
+    <th>Name</th>
     <th>Age</th>
     <th>Phonenumber</th>
     <th>incident</th>
     <th>Bloodgroup</th>
     <th>Gender</th>
     <th>Image</th>
-    <th>Location</th>
+    <th>Hospital name</th>
 
     <th>unit</th>
-    <th>emergency</th>
     <th>require date</th>
     
     <th>operation</th>
@@ -32,9 +48,7 @@
   {% for form in form %}
     <tr>
         
-        <td>{{form.firstname}}</td>
-        <td>{{form.middlename}}</td>
-        <td>{{form.lastname}}</td>
+        <td>{{form.firstname}} {{form.middlename}} {{form.lastname}}</td>
         <td>{{form.age}}</td>
         <td>{{form.contactnumber}}</td>
         <td>{{form.incident}}</td>
@@ -43,23 +57,22 @@
         <td><img src="{{form.image.url}}" width="100" height="100"></td>
         <td>{{form.location}}</td>
         <td>{{form.unit}}</td>
-        <td>{{form.emergency}}</td>
         <td>{{form.requiredate}}</td>
+        <td>  <a href="{% url 'approve' form.id %}"><button>approve</button></a> 
+              <a href="{% url 'decline' form.id %}"><button>decline</button></a>
+        </td>
 
         
         
+
         
-        <td>  <a href="{% url 'donorupdate' form.id %}"><button>edit</button></a>
-          
-        <a href="{% url 'donordelete' form.id %}"><button>delete</button></a> </td>
-    
+  
       </tr> 
   {% endfor %}
       
 </table>
-<a href="{% url 'donorform' %}"><button>add new</button></a>
 
-{% endif %}
+
 
 {% endblock views %}
 

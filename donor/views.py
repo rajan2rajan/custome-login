@@ -10,6 +10,7 @@ import os
 
 # this views is to submit form who donate blood 
 def donorform(request):
+    username = request.user.username
     if request.user.is_authenticated:
         if request.method=="POST":
             form = DonorForm(request.POST,request.FILES)
@@ -18,19 +19,20 @@ def donorform(request):
                 form.save()
         else:
             form = DonorForm()
-        return render(request, 'donorform.html',{'form':form})
+        return render(request, 'donorform.html',{'form':form,"username":username})
     else:
         return redirect('login')
 
 
 # this view is who donate the bloods and their details  
 def donorview(request):
+    username = request.user.username
     if request.user.is_authenticated:
         seven_days_age = datetime.now()- timedelta(days=7)
         data = Donor.objects.filter(donatedate__lt = seven_days_age)
         data.delete()
         all = Donor.objects.all()
-        return render(request, 'donorview.html',{'form':all,'data':data})
+        return render(request, 'donorview.html',{'form':all,'data':data,"username":username})
     else:
         return redirect('login')
     
@@ -43,7 +45,7 @@ def donorview(request):
 
 
 def donorupdate(request,id):
-
+    username = request.user.username
     if request.user.is_authenticated:
         data = Donor.objects.get(id=id)
         if request.method=="POST":
@@ -58,7 +60,7 @@ def donorupdate(request,id):
                 return redirect('donorview')
         else:
             form = DonorForm(instance=data)
-        return render(request,'donorform.html',{'form':form})
+        return render(request,'donorform.html',{'form':form ,"username":username})
     else:
         return redirect('login')
 

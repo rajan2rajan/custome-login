@@ -134,6 +134,7 @@ STATICFILES_DIR= (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'withemail.Account'
+
 AUTHENTICATION_BACKENDS =(
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
     'withemail.backends.CaseInsensativeModelBackend'

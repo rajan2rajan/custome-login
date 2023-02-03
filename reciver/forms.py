@@ -4,14 +4,16 @@ from datetime import datetime,date
 
 
 class ReciverForm(forms.ModelForm):
-    User = forms.CharField(widget=forms.NumberInput)
-    location = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'enter your district only'}))
+    
+    location = forms.CharField(label ='Hospital name')
     requiredate = forms.CharField(widget=forms.DateInput,initial=date.today())
     contactnumber = forms.IntegerField(max_value=9999999999,min_value=9100000000)
     class Meta:
         model = Reciver
-        # fields = ('firstname','middlename','lastname','age','contactnumber','incident','bloodgroup','Gender','image','location','unit')
-        exclude= ('User',)
+        fields = '__all__'
+        
+
+        
 
 
 

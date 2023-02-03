@@ -37,6 +37,12 @@
           -webkit-appearance: none;
           margin: 0;
         }
+
+
+
+
+
+
         </style>
 </head>
 <body>
@@ -56,27 +62,29 @@
             <h5 class="mr-3 font-weight-normal justify-content-start">
                 <a class="p-2 text-dark" href="{% url 'home' %}">Home</a>
             </h5>
-            <form class="search-bar justify-content-start">
-                <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
-            </form>
+            
             {% if perms.donor.delete_donor or perms.donor.edit_donor %}
                 <h5 class="mr-3 font-weight-normal justify-content-start">
-                    <a class="p-2 text-dark" href="{% url 'donorform' %}">donate form</a>
+                    <a class="p-2 text-dark" href="{% url 'donorform' %}">doner form</a>
                 </h5>
 
                 <h5 class="mr-3 font-weight-normal justify-content-start">
-                    <a class="p-2 text-dark" href="{% url 'donorview' %}">edit donate</a>
+                    <a class="p-2 text-dark" href="{% url 'donorview' %}">edit doner</a>
                 </h5>
 
                 <h5 class="mr-3 font-weight-normal justify-content-start">
-                    <a class="p-2 text-dark" href="{% url 'donorview' %}"> verify need</a>
+                    <a class="p-2 text-dark" href="{% url 'reciverview' %}"> verify doner</a>
                 </h5>
             {% endif %}
 
         
 
             <h5 class="mr-3 font-weight-normal justify-content-start">
-                <a class="p-2 text-dark" href="{% url 'reciverform' %}">request blood </a>
+                <a class="p-2 text-dark" href="{% url 'reciverform' %}">requestor form </a>
+            </h5>
+
+            <h5 class="mr-3 font-weight-normal justify-content-start">
+                <a class="p-2 text-dark" href="{% url 'allperson' %}">requestor </a>
             </h5>
 
             <div class="d-flex flex-row-reverse flex-grow-1">
