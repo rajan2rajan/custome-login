@@ -6,6 +6,7 @@ from .utils import send_login_token,send_password_token
 from django.contrib.auth  import login,authenticate,logout,update_session_auth_hash
 from withemail.forms import RegistrationForm,LoginForm,Emailform,UserDetailForm,AdminDetailForm
 from .models import Account,Token_data
+from donor.models import Donor
 from django.contrib.auth.forms import PasswordChangeForm,SetPasswordForm
 
 
@@ -104,7 +105,24 @@ def logoutpage(request):
 def home(request):
     if request.user.is_authenticated:
         username=request.user.username
-        return render(request , 'home.html',{'username':username})
+        total = Donor.objects.all().count()
+        #  (A+, A-, B+, B-, O+, O-, AB+, AB-)
+        Aplus = Donor.objects.filter(bloodgroup='A+').count()
+        Aminus = Donor.objects.filter(bloodgroup='A-').count()
+        Bplus = Donor.objects.filter(bloodgroup='B+').count()
+        Bminus = Donor.objects.filter(bloodgroup='B-').count()
+        Oplus = Donor.objects.filter(bloodgroup='O+').count()
+        Ominus = Donor.objects.filter(bloodgroup='O-').count()
+        ABplus = Donor.objects.filter(bloodgroup='AB+').count()
+        ABminsu = Donor.objects.filter(bloodgroup='AB-').count()
+
+        return render(request , 'home.html',{'username':username,
+        "total":total,
+        'Aplus':Aplus,
+        "Aminus": Aminus,
+        "Bplus":Bplus,
+        "Bminus":Bminus,
+        "Oplus":Oplus,"Ominus":Ominus,"ABplus":ABplus,"ABminsu":ABminsu})
     else:
         return redirect('login')
 
