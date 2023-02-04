@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     # Installed app 
     'withemail',
     'donor',
-    'reciver'
+    'reciver',
+
+    
 ]
 
 MIDDLEWARE = [
