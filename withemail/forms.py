@@ -49,6 +49,7 @@ class UserDetailForm(UserChangeForm):
 		fields = ['username','email','first_name','last_name']
 
 
+
 # admin detail change after login 
 class AdminDetailForm(UserChangeForm):
 	class Meta:

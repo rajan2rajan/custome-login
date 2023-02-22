@@ -72,6 +72,7 @@ def loginpage(request):
 # from here we are checeking weather email is verified or not if not send messages verify your self
         # admin cannot change password and username              
                 if email=="rajan@gmail.com" and password=='R9865177862':
+                    user=authenticate(email=email,password=password)
                     login(request, user)
                     return HttpResponseRedirect('/home/')
  
