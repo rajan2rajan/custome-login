@@ -55,10 +55,3 @@ class ReciverApproved(models.Model):
     user            = models.OneToOneField(Reciver , on_delete=models.CASCADE)
     isapproved      = models.BooleanField(default=False) 
 
-
-
-
-
-
-
-    

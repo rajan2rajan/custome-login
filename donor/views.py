@@ -13,7 +13,7 @@ def donorform(request):
     username = request.user.username
     if request.user.is_authenticated:
         if request.method=="POST":
-            form = DonorForm(request.POST,request.FILES)
+            form = DonorForm(request.POST , request.FILES)
             if form.is_valid():
                 print('hellow')
                 form.save()

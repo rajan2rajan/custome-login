@@ -71,21 +71,33 @@ def loginpage(request):
 # from here we are checeking weather email is verified or not if not send messages verify your self
         # admin cannot change password and username              
                 if email=="rajan@gmail.com" and password=='R9865177862':
-                    user = authenticate(email=email, password=password)
-                    if user is not None:
-                        login(request, user)
-                        return HttpResponseRedirect('/home/')
+                    login(request, user)
+                    return HttpResponseRedirect('/home/')
+ 
                 else:
+                    if email=='rajan@gmail.com':
+                        messages.success(request,'password doesnot match')
+                        return HttpResponseRedirect('/login') 
                     user = Account.objects.filter(email=email).first()
-                    isverified = Token_data.objects.filter(user = user).first()
-                    if isverified.loginverified:
-                        user = authenticate(email=email, password=password)
-                        if user is not None:
-                            login(request, user)
-                            return HttpResponseRedirect('/home/')
+                    if user is None:
+                        messages.success(request,'email doesnot exist')
+                        return HttpResponseRedirect('/signup')
                     else:
-                        messages.info(request,'please verify your self by clicking in email')
-                        return HttpResponseRedirect('/login')
+                        
+                        name = user.id
+                        isverified = Token_data.objects.get(user = name)
+                        if isverified.loginverified==True:
+                            
+                            user = authenticate(email=email, password=password)
+                            if user is not None:
+                                login(request, user)
+                                return HttpResponseRedirect('/home/')
+                            else:
+                                messages.success(request,'password doesnot match')
+                                return HttpResponseRedirect('/login')
+                        else:
+                            messages.info(request,'please verify your self by clicking in email')
+                            return HttpResponseRedirect('/login')
         else:
 
             form = LoginForm()

@@ -64,16 +64,13 @@
             </h5>
             
             {% if perms.donor.delete_donor or perms.donor.edit_donor %}
-                <h5 class="mr-3 font-weight-normal justify-content-start">
-                    <a class="p-2 text-dark" href="{% url 'donorform' %}">doner form</a>
-                </h5>
 
                 <h5 class="mr-3 font-weight-normal justify-content-start">
                     <a class="p-2 text-dark" href="{% url 'donorview' %}">edit doner</a>
                 </h5>
 
                 <h5 class="mr-3 font-weight-normal justify-content-start">
-                    <a class="p-2 text-dark" href="{% url 'reciverview' %}"> verify doner</a>
+                    <a class="p-2 text-dark" href="{% url 'reciverview' %}"> verify reciver</a>
                 </h5>
             {% endif %}
 
@@ -116,7 +113,10 @@
                                     <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                       <li><div><a href="{% url 'logout'%}">logout</a></div></li>
-                                      <li><div><a href="{% url 'oldpassword'%}">change password</a></div></li>
+                                        
+                                        {% if not user.is_staff %}
+                                        <li><div><a href="{% url 'oldpassword'%}">change password</a></div></li>
+                                        {% endif %}
                                       <li><div><a href="{% url 'detailchange'%}">change detail</a></div></li>
                                     </ul>
                                   </div>

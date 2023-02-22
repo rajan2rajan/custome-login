@@ -24,4 +24,5 @@ urlpatterns = [
     path('donor/',include('donor.urls')),
     path('reciver/',include('reciver.urls')),
 
+
 ]+static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

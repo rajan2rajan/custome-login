@@ -99,12 +99,12 @@ def approve(request,id):
         result.save()
         auth_token = str(uuid.uuid4())
         email = request.user.email
-        user = Reciver.objects.get(id=id)
-
+        user = Reciver.objects.get(id = id)
+        data = Reciver.objects.filter(id=id)
         send_email(email,auth_token)
         if len(user.image)>0:
             os.remove(user.image.path)
-        user.delete()
+        data.delete()
         messages.success(request,'information send sucessfull ')
 
         if isemergency:
