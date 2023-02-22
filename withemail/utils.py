@@ -19,10 +19,10 @@ def send_login_token(email , token, username):
 
 
 # token while changing password with old password
-def send_password_token(email , token, username):
+def send_password_token(email , token):
     try:
         subject = 'your account need to be verify'
-        message = f'hi {username}  to change password please click in the link .  http://127.0.0.1:8000/passwordchange/{token}'
+        message = f'hi to change password please click in the link .  http://127.0.0.1:8000/newpassword/{email}/{token}'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email ]
         send_mail( subject, message, email_from, recipient_list )
@@ -33,3 +33,24 @@ def send_password_token(email , token, username):
     
     return True
 
+
+
+
+
+
+
+
+
+def send(link,email):
+    try:
+        subject = 'your account need to be verify'
+        message = f'Hi thank you for registering in geeksforgeeks. {link}'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email ]
+        send_mail( subject, message, email_from, recipient_list )
+
+        
+    except Exception as e:
+        return False
+    
+    return True

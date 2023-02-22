@@ -1,13 +1,14 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
 import uuid
 from .utils import send_login_token,send_password_token
 from django.contrib.auth  import login,authenticate,logout,update_session_auth_hash
 from withemail.forms import RegistrationForm,LoginForm,Emailform,UserDetailForm,AdminDetailForm
 from .models import Account,Token_data
 from donor.models import Donor
-from django.contrib.auth.forms import PasswordChangeForm,SetPasswordForm
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 
@@ -83,7 +84,7 @@ def loginpage(request):
                         messages.success(request,'email doesnot exist')
                         return HttpResponseRedirect('/signup')
                     else:
-                        
+
                         name = user.id
                         isverified = Token_data.objects.get(user = name)
                         if isverified.loginverified==True:
@@ -139,61 +140,6 @@ def home(request):
         return redirect('login')
 
 
-# change password with provided email address (login email and change password email must be same)
-def passwordchange_email(request):
-    user = request.user
-    # orignal_email = Account.objects.get(email = user.email)
-    if  not request.user.is_authenticated:
-        if request.method=="POST":
-            result = Emailform(request.POST)
-            if result.is_valid(): 
-                email = result.cleaned_data['email']
-                if email == request.user.email:
-                    # here it  generate random token 
-                    auth_token = str(uuid.uuid4())
-                    # before selecting any data we should find it's base model  
-                    data = Account.objects.filter(email = email).first()
-    # at first there was not password token so now we are uploading token here 
-                    Token_data.objects.filter(user=data).update(passtoken=auth_token)                
-                    username = request.user.username
-                    send_password_token(email , auth_token, username)
-                    print('sucessfull ')
-                    return HttpResponseRedirect('/passwordchange')
-
-                else:
-                    
-                    messages.info(request,'please use email that you use for login ')
-                    return HttpResponseRedirect('/passwordchange')
-        else:
-            result =Emailform()
-        return render(request , 'passwordchange.html',{'data':result})
-    else:
-        return HttpResponseRedirect('/home')
-
-
-def incomplete(request):
-    # for password change in signup page 
-    # def verify_password(request,token):
-    #     try:
-    #         data = Token_data.objects.get(passtoken = token)
-    #         # if logintoken is already verified then 
-    #         if data.passverified:
-    #             messages.info(request,'change your password')
-    #             return HttpResponseRedirect('/login')
-    #         else:
-    #         # if logintoken is not verified then 
-    #             # data.loginverified=True
-    #             print('is it good')
-            
-
-    #             # return HttpResponseRedirect('/login')
-    #     # if something happen then show exception 
-    #     except Exception as e:
-    #         print(e)
-    #         return HttpResponseRedirect('/login')
-    print('whole area is incomplete')
-
-
 
 # password changing after authentication 
 def oldpassword(request):
@@ -211,6 +157,7 @@ def oldpassword(request):
         return render(request , 'oldpassword.html',{'form':form})
     else:
         return HttpResponseRedirect('/login')
+
 
 
 
@@ -235,20 +182,3 @@ def detailchange(request):
     return render(request, 'detailchange.html',{"form":form})
 
 
-
-# change password without old password for forget password 
-def newpassword(request):
-    user = request.user
-    if not request.user.is_authenticated:
-        if request.method =="POST":
-            form =SetPasswordForm(user, data = request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request,'password change sucessfull')
-                return HttpResponseRedirect('/login')
-        else:
-        
-            form=SetPasswordForm(user)
-        return render(request, 'newpassword.html',{'form':form})
-    else:
-        return redirect('/home/')

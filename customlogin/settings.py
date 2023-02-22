@@ -109,7 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+# when use forget password by django then 
+LOGIN_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

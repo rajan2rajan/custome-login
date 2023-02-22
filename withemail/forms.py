@@ -32,7 +32,14 @@ class RegistrationForm(UserCreationForm):
 
 # password change email form
 class Emailform(forms.Form):
-	email = forms.EmailField(max_length=100,required=True)
+	email = forms.EmailField(max_length=100)
+
+	def clean_email(self):
+		value = self.cleaned_data['email']
+		if Account.objects.filter(email=value).exists():
+			return value
+		else:
+			return forms.ValidationError('this email doesnot exists')
 
 
 # user detail change after login 
@@ -53,5 +60,20 @@ class AdminDetailForm(UserChangeForm):
 class LoginForm(forms.Form):
 	email = forms.CharField(max_length=100,widget=forms.EmailInput)
 	password = forms.CharField(max_length=100,widget=forms.PasswordInput(attrs={'placeholder':'enter your passowrd here'}))
+
+
+# form for change password without email 
+class ChangepasswordForm(forms.Form):
+	password1 = forms.CharField(max_length=15,widget=forms.PasswordInput)
+	password2 = forms.CharField (max_length=15,widget=forms.PasswordInput)
+	
+	def clean_password1(self):
+		value1 = self.cleaned_data['password1']
+		value2 = self.cleaned_data['password2']
+
+		if value1!=value2:
+			raise forms.ValidationError('two password didnot match')
+		return value2
+
 
 
