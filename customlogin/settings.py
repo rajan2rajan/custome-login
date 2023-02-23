@@ -58,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # This is a middleware if want to do any change in code then shows site under construction
+    # 'withemail.middlewares.UnderConstructionMiddleware',
 ]
 
 ROOT_URLCONF = 'customlogin.urls'

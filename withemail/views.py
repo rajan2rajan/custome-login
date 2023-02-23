@@ -183,3 +183,12 @@ def detailchange(request):
     return render(request, 'detailchange.html',{"form":form})
 
 
+
+def aboutus(request):
+    if request.user.is_authenticated:
+        username=request.user.username
+        return render(request,'aboutus.html',{"username":username})
+    else:
+        return HttpResponseRedirect('/login')
+
+
