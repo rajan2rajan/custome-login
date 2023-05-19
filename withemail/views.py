@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib import messages
 
 import uuid
@@ -190,5 +190,39 @@ def aboutus(request):
         return render(request,'aboutus.html',{"username":username})
     else:
         return HttpResponseRedirect('/login')
+
+   
+    
+from django.contrib.auth.decorators import login_required
+from .utils import contactsend
+from django.core.mail import send_mail
+from django.conf import settings
+
+# @login_required
+# def contact_us(request):
+#     if request.method =="POST":
+#         msg = request.POST['message']
+#         print(msg)
+#         send_mail(
+#             msg,
+#             settings.EMAIL_HOST_USER,
+#             ['rajanbhandari939@gmail.com'],
+#             fail_silently=True
+#         )
+#     return render(request,'home.html')
+
+from .forms import ContactusForm
+
+@login_required
+def contact_us(request):
+    if request.method == 'POST':
+        form = ContactusForm(request.POST)
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            print(f'Message: {message}')
+    else:
+        form = ContactusForm()
+    
+    return render(request, 'home.html', {'contactus': form})
 
 

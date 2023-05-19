@@ -12,6 +12,7 @@ urlpatterns = [
     path('oldpassword/', oldpassword , name = 'oldpassword'),
     path('detailchange/', detailchange , name = 'detailchange'),
     path('aboutus/', aboutus , name = 'aboutus'),
+    path('home/',contact_us, name='contactus'),
 
 
 

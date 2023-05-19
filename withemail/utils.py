@@ -33,6 +33,18 @@ def send_password_token(email , token):
     
     return True
 
+def contactsend(message):
+    try:
+        subject = 'contact us'
+        message = f'{message}'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['rajanbhandari939@gmail.com',]
+        send_mail(subject, message, email_from, recipient_list )
+        
+    except Exception as e:
+        return False
+    
+    return True
 
 
 
@@ -54,3 +66,7 @@ def send(link,email):
         return False
     
     return True
+
+
+
+

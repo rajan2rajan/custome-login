@@ -76,5 +76,7 @@ class ChangepasswordForm(forms.Form):
 			raise forms.ValidationError('two password didnot match')
 		return value2
 
+class ContactusForm(forms.Form):
+	message = forms.CharField(max_length=500 , required= True)
 
 

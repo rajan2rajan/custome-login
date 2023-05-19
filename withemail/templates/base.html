@@ -160,7 +160,37 @@ input.submitbutton.ripplelink {
     margin-left: 5px;
     color: #ffffff;
 }
+.image-container {
+  position: relative;
+}
 
+.image {
+  width: 100px;
+  height: 100px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 999;
+  cursor: pointer;
+}
+
+.popOutImage {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  filter: brightness(100%);
+}
 
 
 
@@ -193,7 +223,7 @@ input.submitbutton.ripplelink {
             {% if perms.donor.delete_donor or perms.donor.edit_donor %}
 
                 <h5 class="mr-3 font-weight-normal justify-content-start">
-                    <a class="p-2 text-dark" href="{% url 'donorview' %}">edit doner</a>
+                    <a class="p-2 text-dark" href="{% url 'donorview' %}">Donor</a>
                 </h5>
 
                 <h5 class="mr-3 font-weight-normal justify-content-start">
@@ -313,9 +343,11 @@ input.submitbutton.ripplelink {
                       <div class="emailfield">
                     <form method="POST">
                     {% csrf_token %}
-                        message<input type="text"  > <br><br>
-                    <input class="submitbutton ripplelink" type="submit" value="submit">
+                      <input type="text" name="message" >
+                        
+                      <a href="{% url 'contactus' %} "> <button type="submit" class="btn btn-primary">send</button></a>
                     </form>  
+                   
                     </div>
                     </div>
                     </div>
